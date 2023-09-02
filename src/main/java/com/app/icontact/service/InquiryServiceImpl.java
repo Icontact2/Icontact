@@ -18,7 +18,7 @@ public class InquiryServiceImpl implements InquiryService {
     @Override
     public void inquiry(InquiryVO inquiryVO) { inquiryDAO.save(inquiryVO);}
 
-    //문의목록보기
-    @Override
-    public List<InquiryDTO> getList(Pagination pagination) {return InquiryDAO.showInquiryList(pagination); }
+//    //문의목록보기
+//    @Override
+//    public List<InquiryDTO> getList(Pagination pagination) {return InquiryDAO.showInquiryList(pagination); }
 }

@@ -53,17 +53,16 @@ $(document).ready(function(){
         console.log("----------22");
 
         text += `
-            <a href="" class="blog-page-post-list-item">
+            <a href="/idea/detail?id=${post.id}" class="blog-page-post-list-item">
                 <div class="blog-page-post-list-item-wrap">
-                    <p class="blog-page-post-list-item-tag">${post.sortId}</p><!--창업-->
+                    <p class="blog-page-post-list-item-tag">${post.sortName}</p><!--창업-->
                     <div class="blog-page-post-list-item-title">${post.communityTitle}</div><!--게시글 제목(사진 첨부O)-->
                     <div class="blog-page-post-list-item-description">
-                        게시글 시작 일부 미리보기
-                    </div>
+                    </div><!--게시글 시작 일부 미리보기-->
                     <div class="blog-page-post-list-item-explain">
                         <div>${post.communityUpdateDate}</div><!--2023년 7월 28일--> <!---->
                         <span class="blog-page-post-list-item-explain-bar"></span>
-                        <div>게시글 작성자</div>
+                        <div>${post.userName}</div><!--게시글 작성자-->
                     </div>
                 </div>
                 

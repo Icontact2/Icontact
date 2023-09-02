@@ -29,5 +29,8 @@
         <typeAlias type="com.app.icontact.DTO.CommunityDTO2" alias="communityDTO2" />
         <typeAlias type="com.app.icontact.DTO.IdeaDTO4" alias="ideaDTO4" />
         <typeAlias type="com.app.icontact.DTO.BusinessDTO" alias="businessDTO" />
+        <typeAlias type="com.app.icontact.domain.ProfileFileVO" alias="profileFileVO" />
+        <typeAlias type="com.app.icontact.DTO.ProfileFileDTO" alias="profileFileDTO" />
+        <typeAlias type="com.app.icontact.DTO.UserDTO2" alias="userDTO2" />
     </typeAliases>
 </configuration>

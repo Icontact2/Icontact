@@ -2,9 +2,14 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.app.icontact.mapper.CommunityMapper">
     <select id="selectComAll" resultType="communityDTO">
-        SELECT ID, COMMUNITY_TITLE, COMMUNITY_CONTENT, COMMUNITY_REGISTER_DATE, COMMUNITY_UPDATE_DATE, COMMUNITY_READ_COUNT, SORT_ID, USER_ID
-        FROM TBL_COMMUNITY
-        ORDER BY ID DESC
+        SELECT RC.ID, COMMUNITY_TITLE, COMMUNITY_CONTENT, COMMUNITY_REGISTER_DATE, COMMUNITY_UPDATE_DATE, COMMUNITY_READ_COUNT, SORT_ID, USER_ID, USER_NAME, SORT_NAME
+        FROM TBL_USER U JOIN (
+            SELECT C.ID, COMMUNITY_TITLE, COMMUNITY_CONTENT, COMMUNITY_REGISTER_DATE, COMMUNITY_UPDATE_DATE, COMMUNITY_READ_COUNT, SORT_ID, USER_ID, SORT_NAME
+            FROM TBL_COMMUNITY C JOIN TBL_SORT S
+            ON S.ID = C.SORT_ID
+        ) RC
+        ON U.ID = RC.USER_ID
+        ORDER BY RC.ID DESC
     </select>
 
     <select id="selectComMine" resultType="communityVO">

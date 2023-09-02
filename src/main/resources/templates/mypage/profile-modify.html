@@ -65,7 +65,7 @@
                 <div class="edit-user-info_header-title">회원정보수정</div>
                 <a class="edit-user-info_header_withdrawals" href="/withdrawals/new">탈퇴하기</a>
             </div>
-            <form th:action="@{/mypage/profile-modify}" name="modifyForm" method="post" enctype="multipart/form-data" th:object="${userVO}"><form>
+            <form th:action="@{/mypage/profile-modify}" name="modifyForm" method="post" enctype="multipart/form-data" th:object="${userDTO2}"><form>
                 <div class="edit-user-info_form-item">
                     <div class="edit-user-info_form-item_title">
                         이메일
@@ -211,13 +211,13 @@
                             <div class="expert-form-group_input">
                                 <div class="edit-user-info_form-item_field">
                                     <div class="edit-user-info_input">
-                                        <input class="form-control" value="닉네임" th:field="*{userNickname}">
+                                        <input id="nickname" class="form-control" value="닉네임" th:field="*{userNickname}">
                                         <div class="edit-user-info_input_error"></div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="edit-user-info_form-item_field_warning">다른 유저와 겹치지 않도록 입력해주세요. (2~15자)</div>
+                        <div id="nicknameInfo" class="edit-user-info_form-item_field_warning">다른 유저와 겹치지 않도록 입력해주세요. (2~15자)</div>
                     </div>
                 </div>
 <!--                <div class="edit-user-info_form-item">-->
@@ -295,23 +295,49 @@
 <!--                    </div>-->
 <!--                </div>-->
                 <div class="edit-user-info_form-item">
-                    <div class="edit-user-info_form-item_title">프로필 이미지</div>
+                    <div class="edit-user-info_form-item_title">프로필 이미지
+                        <div class="edit-user-info_form-item_title_require"></div>
+                    </div>
                     <div class="expert-form-group edit-user-info_form-item_group">
                         <div class="expert-form-group_content">
                             <div class="expert-form-group_input">
-                                <div class="edit-user-info_form-item_field edit-user-info_form-item_field-profile">
+                                <div class="edit-user-info_form-item_field edit-user-info_form-item_field-profile profileFile">
                                     <div class="image-single-input-wrap">
                                         <ul class="image-single-input">
                                             <li class="image-single-input_entry">
-                                                <button class="image-single-input_entry_button" type="button">
-                                                    <img class="image-single-input_entry_image" src="https://image.ohou.se/i/bucketplace-v2-development/uploads/default_images/avatar.png?gif=1&amp;w=640&amp;h=640&amp;c=c&amp;webp=1">
-                                                </button>
+<!--                                                <button class="image-single-input_entry_button" type="button">-->
+<!--                                                    <img class="image-single-input_entry_image" src="https://image.ohou.se/i/bucketplace-v2-development/uploads/default_images/avatar.png?gif=1&amp;w=640&amp;h=640&amp;c=c&amp;webp=1">-->
+<!--                                                </button>-->
+                                                <label for="upload" type="button" class=" attach" style="width: 200px;height: 200px;">
+                                                    <div class="plus-btn">
+                                                        <span class="plus"></span>
+                                                    </div>
+                                                    <div class="preview-layout">
+                                                        <img src="" class="thumbnail representative">
+                                                        <div class="x">
+                                                            <img src="/images/icon/x.svg" width="100%" height="100%">
+                                                        </div>
+                                                        <!--x표시-->
+                                                    </div>
+
+                                                </label>
+                                                <input type="file" id="upload" class="upload" style="display: none;">
+                                                <div class="preview-layout">
+                                                    <img src="" class="thumbnail representative">
+                                                    <div class="x preview-layout">
+                                                        <img src="/images/icon/x.svg" width="100%" height="100%">
+                                                    </div>
+                                                    <!--x표시-->
+                                                </div>
+
+
                                             </li>
                                         </ul>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        <div class="edit-user-info_form-item_field_warning">변경하실 프로필 사진을 골라주세요</div>
                     </div>
                 </div>
                 <div class="edit-user-info_form-item">
@@ -326,7 +352,7 @@
                         </div>
                     </div>
                 </div>
-                <button class="button button-color button-size-50 button-shape-4 edit-user-info_submit" type="submit">회원 정보 수정</button>
+                <button class="button button-color button-size-50 button-shape-4 edit-user-info_submit ok-button" type="submit">회원 정보 수정</button>
             </form>
         </div>
         <footer th:replace="~{/fix/footer :: #main-footer}"></footer>
@@ -336,6 +362,57 @@
 
 <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
 <script src="/js/modal/modal.js"></script>
+<script>
+
+//    $(document).ready(function() {
+//        $profileFile = $(".profileFile");
+//        // $userVO = $(`th:object="${userVO}"`);
+//
+//        console.log($profileFile);
+//
+//        let textIn = ``;
+//
+//        console.log($profileFile);
+//        // console.log($userVO);
+//
+//        if(true) {
+//            textIn += `
+//                <div class="image-single-input-wrap">
+//                                        <ul class="image-single-input">
+//                                            <li class="image-single-input_entry">
+//                                                <label for="upload" type="button" class=" attach" style="width: 200px;height: 200px;">
+//                                                    <div class="plus-btn">
+//                                                        <span class="plus"></span>
+//                                                    </div>
+//                                                    <div class="preview-layout">
+//                                                        <img src="" class="thumbnail representative">
+//                                                        <div class="x">
+//                                                            <img src="/images/icon/x.svg" width="100%" height="100%">
+//                                                        </div>
+//                                                    </div>
+//
+//                                                </label>
+//                                                <input type="file" id="upload" class="upload" style="display: none;">
+//<!--                                                <div class="preview-layout">-->
+//<!--                                                    <img src="" class="thumbnail representative">-->
+//<!--                                                    <div class="x preview-layout">-->
+//<!--                                                        <img src="/images/icon/x.svg" width="100%" height="100%">-->
+//<!--                                                    </div>-->
+//<!--                                                </div>-->
+//
+//                                            </li>
+//                                        </ul>
+//                                    </div>
+//            `
+//        }
+//        console.log(textIn);
+//        console.log($profileFile);
+//
+//        $profileFile.append(textIn);
+//    });
+
+
+</script>
 <script src="/js/mypage/profile-modify.js"></script>
 
 </html>

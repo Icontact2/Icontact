@@ -11,6 +11,6 @@ public interface InquiryService {
     //  문의 작성
     public void inquiry(InquiryVO inquiryVO);
 
-    // 문의 목록보기
-    public List<InquiryDTO> getList(Pagination pagination);
+//    // 문의 목록보기
+//    public List<InquiryDTO> getList(Pagination pagination);
 }

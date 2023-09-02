@@ -34,11 +34,11 @@ public class InquiryController {
         return new RedirectView("/icontact/");
     }
 
-    //문의목록보기
-    @GetMapping("list")
-    public void showList(Pagination pagination, Model model){
-        pagination.progress();
-        model.addAttribute("inquiries", inquiryService.getList(pagination));
-    }
+//    //문의목록보기
+//    @GetMapping("list")
+//    public void showList(Pagination pagination, Model model){
+//        pagination.progress();
+//        model.addAttribute("inquiries", inquiryService.getList(pagination));
+//    }
 
 }
