@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.app.icontact.mapper.MypageMapper">
-    <select id="selectUser" resultType="userVO">
+    <select id="selectUser" resultType="userDTO2">
         SELECT ID, USER_EMAIL, USER_PASSWORD, USER_NAME, USER_NICKNAME, USER_TYPE, USER_INTRO, USER_PHONE, USER_STATUS
         FROM TBL_USER WHERE ID = #{id}
     </select>
@@ -18,20 +18,42 @@
     </update>
 
     <insert id="insertBusinessRegister">
+        <selectKey keyProperty="seqId" order="BEFORE" resultType="long">
+            SELECT SEQ_BUSINESS.NEXTVAL FROM DUAL
+        </selectKey>
         INSERT INTO TBL_BUSINESS
         (ID, BUSINESS_NAME, BUSINESS_NUMBER, BUSINESS_SITE, BUSINESS_INDUSTRY, BUSINESS_INTRO, USER_ID)
-        VALUES(SEQ_BUSINESS.NEXTVAL, #{businessName}, #{businessNumber}, #{businessSite}, #{businessIndustry}, #{businessIntro}, #{id});
+        VALUES(#{seqId}, #{businessName}, #{businessNumber}, #{businessSite}, #{businessIndustry}, #{businessIntro}, #{id})
     </insert>
 
     <select id="selectBusinessRegister" resultType="businessDTO">
-        SELECT B.ID, BUSINESS_NAME, BUSINESS_NUMBER, BUSINESS_SITE, BUSINESS_INDUSTRY, BUSINESS_INTRO, B.USER_ID,USER_EMAIL, USER_NAME, USER_PHONE
+        SELECT B.ID, BUSINESS_NAME, BUSINESS_NUMBER, BUSINESS_SITE, BUSINESS_INDUSTRY, BUSINESS_INTRO, B.USER_ID, USER_EMAIL, USER_NAME, USER_PHONE
         FROM TBL_USER U JOIN TBL_BUSINESS B
-        ON U.ID = B.USER_ID AND U.ID = #{id};
+        ON U.ID = B.USER_ID AND B.USER_ID = #{id}
     </select>
 
     <update id="updateBusinessRegister">
         UPDATE TBL_BUSINESS
         SET BUSINESS_NAME = #{businessName}, BUSINESS_NUMBER = #{businessNumber}, BUSINESS_SITE = #{businessSite}, BUSINESS_INDUSTRY = #{businessIndustry}, BUSINESS_INTRO = #{businessIntro}
-        WHERE USER_ID = #{id}
+        WHERE USER_ID = #{userId}
     </update>
+
+    <select id="selectUserWithProfile" resultType="userDTO2">
+        SELECT ID, USER_EMAIL, USER_PASSWORD, USER_NAME, USER_NICKNAME, USER_TYPE, USER_INTRO, USER_PHONE, USER_STATUS
+        FROM TBL_USER WHERE ID = #{id}
+    </select>
+
+    <update id="updateUserType">
+        UPDATE TBL_USER
+        SET USER_TYPE='사업가'
+        WHERE ID = #{id}
+    </update>
+
+    <select id="selectMyIdeas" resultType="ideaDTO4">
+        SELECT ID, IDEA_TITLE, IDEA_INTRO, IDEA_DETAIL, IDEA_CATEGORY, IDEA_REGISTER_DATE, IDEA_UPDATE_DATE, IDEA_TYPE, IDEA_PRICE, IDEA_READ_COUNT, IDEA_MAX, USER_ID
+        FROM TBL_IDEA
+        WHERE USER_ID = #{id}
+        ORDER BY ID DESC
+    </select>
+
 </mapper>

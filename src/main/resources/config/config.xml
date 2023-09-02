@@ -29,7 +29,13 @@
         <typeAlias type="com.app.icontact.DTO.CommunityDTO2" alias="communityDTO2" />
         <typeAlias type="com.app.icontact.DTO.IdeaDTO4" alias="ideaDTO4" />
         <typeAlias type="com.app.icontact.DTO.BusinessDTO" alias="businessDTO" />
+<<<<<<< HEAD
         <typeAlias type="com.app.icontact.DTO.IdeaDTO5" alias="ideaDTO5" />
         <typeAlias type="com.app.icontact.domain.IdeaCategoryNames" alias="ideaCategoryNames" />
+=======
+        <typeAlias type="com.app.icontact.domain.ProfileFileVO" alias="profileFileVO" />
+        <typeAlias type="com.app.icontact.DTO.ProfileFileDTO" alias="profileFileDTO" />
+        <typeAlias type="com.app.icontact.DTO.UserDTO2" alias="userDTO2" />
+>>>>>>> test/getpull0826
     </typeAliases>
 </configuration>

@@ -138,7 +138,7 @@
                         </div>
                         <div class="sales-form-group-col">
                             <div class="sales-form-control-wrap">
-                                <input type="text" class="form-control" placeholder="홍길동" field="*{userName}">
+                                <input type="text" class="form-control" placeholder="홍길동" th:field="*{userName}" readonly>
                             </div>
                         </div>
                     </div>
@@ -151,12 +151,15 @@
                         </div>
                         <!--                        <input type="tel" name="businessNumber" hidden th:field="*{businessNumber}">-->
                         <div class="sales-form-group-col">
+<!--                            <div class="sales-form-control-wrap">-->
+<!--                                <input type="tel" class="form-control" placeholder="010" value="" maxlength="3">-->
+<!--                                <span class="sales-form-divider">-</span>-->
+<!--                                <input type="tel" class="form-control" placeholder="1234" value="" maxlength="4">-->
+<!--                                <span class="sales-form-divider">-</span>-->
+<!--                                <input type="tel" class="form-control" placeholder="5678" value="" maxlength="4">-->
+<!--                            </div>-->
                             <div class="sales-form-control-wrap">
-                                <input type="tel" class="form-control" placeholder="010" value="" maxlength="3">
-                                <span class="sales-form-divider">-</span>
-                                <input type="tel" class="form-control" placeholder="1234" value="" maxlength="4">
-                                <span class="sales-form-divider">-</span>
-                                <input type="tel" class="form-control" placeholder="5678" value="" maxlength="4">
+                                <input type="text" class="form-control" placeholder="홍길동" th:field="*{userPhone}" readonly>
                             </div>
                         </div>
                     </div>
@@ -169,7 +172,7 @@
                         </div>
                         <div class="sales-form-group-col">
                             <div class="sales-form-control-wrap">
-                                <input type="text" class="form-control" placeholder="hong@icontact.com"  field="*{userEmail}">   <!--    value=""    -->
+                                <input type="text" class="form-control" placeholder="hong@icontact.com"  th:field="*{userEmail}" readonly>   <!--    value=""    -->
                             </div>
                         </div>
                     </div>
@@ -227,7 +230,7 @@
                         </div>
                         <div class="sales-form-group-col">
                             <div class="sales-form-control-wrap">
-                                <input type="email" class="form-control" placeholder="www.icontact.com" value="" th:field="*{businessSite}">
+                                <input type="text" class="form-control" placeholder="www.icontact.com" value="" th:field="*{businessSite}">
                             </div>
                         </div>
                     </div>
@@ -383,7 +386,7 @@
                 </div>
 
                 <div class="sales-form-btn-apply">
-                    <button class="btn btn-lg btn-priority" type="submit">사업가 인증 완료</button>
+                    <button class="btn btn-lg btn-priority join-button" type="submit">사업가 인증 완료</button>
                 </div>
 
             </form>
@@ -391,6 +394,7 @@
     </div>
 </main>
 
-
+<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+<script src="/js/mypage/business.js"></script>
 
 </html>

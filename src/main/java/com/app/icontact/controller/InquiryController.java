@@ -37,4 +37,5 @@ public class InquiryController {
         return new RedirectView("/icontact/");
     }
 
+
 }

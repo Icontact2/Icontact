@@ -14,4 +14,6 @@ public interface InquiryService {
     public void inquiry(InquiryVO inquiryVO);
 
 
+
 }
+
