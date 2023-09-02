@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.app.icontact.mapper.ProfileFileMapper">
+    <insert id="insertProfile">
+        INSERT INTO TBL_PROFILE
+(ID, PROFILE_PATH, PROFILE_UUID, PROFILE_NAME, PROFILE_TYPE, PROFILE_SIZE, USER_ID)
+VALUES(SEQ_PROFILE.NEXTVAL, #{profilePath}, #{profileUuid}, #{profileName}, #{profileType}, #{profileSize}, #{userId})
+    </insert>
+
+    <select id="selectProfile" resultType="profileFileVO">
+       SELECT ID, PROFILE_PATH, PROFILE_UUID, PROFILE_NAME, PROFILE_TYPE, PROFILE_SIZE, USER_ID
+        FROM TBL_PROFILE
+        WHERE USER_ID = #{userId}
+    </select>
+
+    <select id="selectOneProfile" resultType="profileFileVO">
+       SELECT ID, PROFILE_PATH, PROFILE_UUID, PROFILE_NAME, PROFILE_TYPE, PROFILE_SIZE, USER_ID
+        FROM (
+            SELECT ID, PROFILE_PATH, PROFILE_UUID, PROFILE_NAME, PROFILE_TYPE, PROFILE_SIZE, USER_ID
+            FROM TBL_PROFILE
+            WHERE USER_ID = #{userId}
+        )
+        WHERE ROWNUM = 1
+        ORDER BY ID DESC
+    </select>
+</mapper>

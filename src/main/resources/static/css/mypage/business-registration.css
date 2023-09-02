@@ -653,3 +653,21 @@ textarea.form-control {
     height: 50px;
     font-size: 18px;
 }
+
+
+
+/*
+*/
+
+
+
+.join-button[disabled] {
+    background-color: #f7f8fa;
+    border: 1px solid #dadce0;
+    color: #dadce0;
+    cursor: not-allowed;
+}
+
+
+
+

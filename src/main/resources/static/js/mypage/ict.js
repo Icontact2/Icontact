@@ -32,6 +32,22 @@ $(document).ready(function(){
     }
 
 
+    if(myId.files.length != 0){
+        myId.files.forEach(file => {
+            console.log(file);
+            if(file.profileType == "REPRESENTATIVE"){
+                console.log("if문 들어옴");
+                textImg += `
+                    <img class="profile-img" src="/profile-files/display?fileName=${file.profilePath}/t_${file.profileUuid}_${file.profileName}">
+                `
+            }
+        })
+    } else {
+        textImg += `
+            <img class="profile-img" src="https://image.ohou.se/i/bucketplace-v2-development/uploads/default_images/avatar.png?gif=1&amp;w=144&amp;h=144&amp;c=c&amp;webp=1">
+        `
+    }
+
 
 
 

@@ -1,6 +1,7 @@
 package com.app.icontact.controller;
 
 import com.app.icontact.DTO.BusinessDTO;
+import com.app.icontact.DTO.UserDTO2;
 import com.app.icontact.domain.BusinessVO;
 import com.app.icontact.domain.UserVO;
 import com.app.icontact.service.MypageService;
@@ -44,6 +45,9 @@ public class MypageController {
         Long userId = Long.parseLong(sessionId);
 //        model.addAttribute("id", userId);
         model.addAttribute("mypageInfos", mypageService.getUser(userId));
+//        model.addAttribute("mypageInfos", mypageService.getUser(63L));
+        model.addAttribute("ideas", mypageService.getMyIdeas(userId));
+//        model.addAttribute("ideas", mypageService.getMyIdeas(63L));
     }
 
     @GetMapping("mypage")
@@ -85,31 +89,121 @@ public class MypageController {
 
     }
 
+//    @PostMapping("profile-modify")
+//    public RedirectView changedUserInfo(UserVO userVO, RedirectAttributes redirectAttributes) {
+//
+//        log.info("{}.....1111.....{}", session.getAttribute("id"), userVO);
+//
+//        mypageService.modifyUserInfo(userVO);
+//        redirectAttributes.addAttribute("id", userVO.getId());
+//        return new RedirectView("/mypage/mypage");
+//    }
+
     @PostMapping("profile-modify")
-    public RedirectView changedUserInfo(UserVO userVO, RedirectAttributes redirectAttributes) {
+    public RedirectView changedUserInfo(UserDTO2 userDTO2, RedirectAttributes redirectAttributes) {
 
-        log.info("{}.....1111.....{}", session.getAttribute("id"), userVO);
+        log.info("{}.....1111.....{}", session.getAttribute("id"), userDTO2);
 
-        mypageService.modifyUserInfo(userVO);
-        redirectAttributes.addAttribute("id", userVO.getId());
+        mypageService.modifyUserInfo(userDTO2);
+        redirectAttributes.addAttribute("id", userDTO2.getId());
         return new RedirectView("/mypage/mypage");
     }
 
 
     @GetMapping("business-registration")
     // 사업자 등록에 필요한 객체를 인자로 넘겨줄 것. BusinessVO...
-    public void register(BusinessDTO businessDTO, Model model){
+    public RedirectView register(BusinessDTO businessDTO, RedirectAttributes redirectAttributes){
         String sessionId = (String)session.getAttribute("id");
         Long userId = Long.parseLong(sessionId);
         businessDTO.setUserId(userId);
 
-        log.info("{}.....9999.....{}", session.getAttribute("id"), businessDTO);
-        model.addAttribute(mypageService.getBusinessRegister(userId));
+//        log.info("{}.....9999.....", "mypageController");
+
+
+//        log.info("{}.....9999.....{}", session.getAttribute("id"), businessDTO);
+//        model.addAttribute(mypageService.getBusinessRegister(userId));
+
+
+
+//        log.info("{}.....99REAL99.....{}", "98mypageController", businessDTO);
+//        log.info("{}.....99REAL99.....{}", "99mypageController", mypageService.getBusinessRegister(userId));
+
+        if(mypageService.getBusinessRegister(userId) == null){
+            log.info("=============");
+            businessDTO.setUserEmail(mypageService.getUser(userId).getUserEmail());
+            businessDTO.setUserName(mypageService.getUser(userId).getUserName());
+            businessDTO.setUserPhone(mypageService.getUser(userId).getUserPhone());
+//            log.info("{}.....99REAL99.....{}", "1000mypageController", businessDTO);
+            return new RedirectView("/mypage/business-registration");
+        } else {
+            log.info("--------------");
+//            log.info("{}.....99REAL99.....{}", "9900mypageController", mypageService.getBusinessRegister(userId));
+            redirectAttributes.addAttribute(mypageService.getBusinessRegister(userId));
+////            log.info("{}.....99REAL99.....{}", "99mypageController", mypageService.getBusinessRegister(userId));
+//            log.info("{}.....99REAL99.....{}", "98mypageController", businessDTO);
+////            log.info("{}.....99REAL99.....{}", "99mypageController", mypageService.getBusinessRegister(userId));
+            return new RedirectView("/mypage/mypage");
+        }
+
+//        log.info("{}.....99REAL99.....{}", "97mypageController", businessDTO);
+
+//        log.info("======완료=======");
     }
 
+
+//    @GetMapping("business-registration")
+//    // 사업자 등록에 필요한 객체를 인자로 넘겨줄 것. BusinessVO...
+//    public void register(BusinessDTO businessDTO, Model model){
+//        String sessionId = (String)session.getAttribute("id");
+//        Long userId = Long.parseLong(sessionId);
+//        businessDTO.setUserId(userId);
+//
+//        log.info("{}.....9999.....", "mypageController");
+//
+//
+//        log.info("{}.....9999.....{}", session.getAttribute("id"), businessDTO);
+////        model.addAttribute(mypageService.getBusinessRegister(userId));
+//
+//
+//
+//        log.info("{}.....99REAL99.....{}", "98mypageController", businessDTO);
+//        log.info("{}.....99REAL99.....{}", "99mypageController", mypageService.getBusinessRegister(userId));
+//
+//        if(mypageService.getBusinessRegister(userId) == null){
+//            log.info("=============");
+//            businessDTO.setUserEmail(mypageService.getUser(userId).getUserEmail());
+//            businessDTO.setUserName(mypageService.getUser(userId).getUserName());
+//            businessDTO.setUserPhone(mypageService.getUser(userId).getUserPhone());
+//            log.info("{}.....99REAL99.....{}", "1000mypageController", businessDTO);
+//        } else {
+//            log.info("{}.....99REAL99.....{}", "9900mypageController", mypageService.getBusinessRegister(userId));
+//            model.addAttribute(mypageService.getBusinessRegister(userId));
+////            log.info("{}.....99REAL99.....{}", "99mypageController", mypageService.getBusinessRegister(userId));
+//            log.info("{}.....99REAL99.....{}", "98mypageController", businessDTO);
+////            log.info("{}.....99REAL99.....{}", "99mypageController", mypageService.getBusinessRegister(userId));
+//        }
+//
+//        log.info("{}.....99REAL99.....{}", "97mypageController", businessDTO);
+//
+//        log.info("======완료=======");
+//    }
+
+
+
+
+
     @PostMapping("business-registration")
-    public RedirectView writeRegister(){
-        return new RedirectView();
+    public RedirectView writeRegister(BusinessDTO businessDTO, RedirectAttributes redirectAttributes){
+
+        log.info("{}.....{}..{}...{}", session.getAttribute("id"), "PostMapping", businessDTO.getUserId(),businessDTO);
+        log.info("{}.....1111...{}", "PostMapping22", businessDTO);
+
+        mypageService.writeBusinessRegister(businessDTO);
+        redirectAttributes.addAttribute("id", businessDTO.getUserId());
+
+
+
+        return new RedirectView("/mypage/mypage");
     }
 
 

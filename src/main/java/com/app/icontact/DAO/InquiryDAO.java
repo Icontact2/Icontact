@@ -18,4 +18,5 @@ public class InquiryDAO {
 
     //  문의 작성
     public void save(InquiryVO inquiryVO) { inquiryMapper.insertInquiry(inquiryVO);}
+
 }
